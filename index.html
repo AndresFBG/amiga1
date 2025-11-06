@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Televisor - Objeto Tecnológico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+            text-align: center;
+        }
+
+        .stop-motion-container {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .stop-motion-title {
+            font-size: 2em;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .animation-stage {
+            width: 500px;
+            height: 400px;
+            margin: 0 auto 30px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tv-evolution {
+            position: absolute;
+            transition: none;
+        }
+
+        /* Frame 1: TV Antiguo (1950s) */
+        .tv-old {
+            width: 280px;
+            height: 250px;
+        }
+
+        .tv-old-body {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #8B4513, #654321);
+            border-radius: 30px 30px 10px 10px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .tv-old-screen {
+            width: 100%;
+            height: 65%;
+            background: radial-gradient(circle, #444, #111);
+            border-radius: 50%;
+            border: 8px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tv-old-legs {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .tv-old-leg {
+            width: 60px;
+            height: 40px;
+            background: linear-gradient(145deg, #8B4513, #654321);
+            border-radius: 5px;
+            transform: perspective(100px) rotateX(20deg);
+        }
+
+        .tv-old-knobs {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .knob {
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, #888, #333);
+            border-radius: 50%;
+            border: 3px solid #222;
+        }
+
+        /* Frame 2: TV Box (1980s-90s) */
+        .tv-box {
+            width: 320px;
+            height: 260px;
+        }
+
+        .tv-box-body {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #555, #2a2a2a);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .tv-box-screen {
+            width: 100%;
+            height: 75%;
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            border-radius: 8px;
+            border: 5px solid #111;
+        }
+
+        .tv-box-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            justify-content: center;
+        }
+
+        .box-button {
+            width: 40px;
+            height: 15px;
+            background: linear-gradient(145deg, #444, #222);
+            border-radius: 3px;
+        }
+
+        /* Frame 3: TV Plano (2000s) */
+        .tv-flat {
+            width: 380px;
+            height: 240px;
+        }
+
+        .tv-flat-frame {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .tv-flat-screen {
+            width: 100%;
+            height: 85%;
+            background: linear-gradient(135deg, #2a4a6a, #1a3a5a);
+            border-radius: 5px;
+        }
+
+        .tv-flat-stand {
+            width: 120px;
+            height: 20px;
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            margin: 10px auto 0;
+            border-radius: 5px;
+        }
+
+        /* Frame 4: Smart TV (2010s-Actual) */
+        .tv-smart {
+            width: 420px;
+            height: 250px;
+        }
+
+        .tv-smart-frame {
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            border-radius: 5px;
+            padding: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .tv-smart-screen {
+            width: 100%;
+            height: 88%;
+            background: linear-gradient(135deg, #4a90e2, #63b8ff);
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .smart-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(74, 144, 226, 0.3), transparent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .tv-smart-stand {
+            width: 100px;
+            height: 15px;
+            background: #0a0a0a;
+            margin: 8px auto 0;
+            border-radius: 3px;
+        }
+
+        .frame-info {
+            font-size: 1.3em;
+            color: #ffd700;
+            font-weight: bold;
+            margin-top: 20px;
+            min-height: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .control-btn {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .control-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .play-pause {
+            font-size: 1.5em;
+            padding: 15px 30px;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #ffd700;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+
+        .year {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media screen and (max-width: 1024px) {
+            h1 {
+                font-size: 2.8em;
+            }
+
+            .animation-stage {
+                width: 450px;
+                height: 360px;
+            }
+
+            .tv-old {
+                width: 250px;
+                height: 220px;
+            }
+
+            .tv-box {
+                width: 280px;
+                height: 230px;
+            }
+
+            .tv-flat {
+                width: 340px;
+                height: 220px;
+            }
+
+            .tv-smart {
+                width: 380px;
+                height: 230px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            header {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+            }
+
+            .stop-motion-container {
+                padding: 25px 15px;
+            }
+
+            .stop-motion-title {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+
+            .animation-stage {
+                width: 100%;
+                max-width: 400px;
+                height: 320px;
+            }
+
+            .tv-old {
+                width: 220px;
+                height: 190px;
+            }
+
+            .tv-old-body {
+                padding: 20px;
+            }
+
+            .tv-old-knobs {
+                right: 15px;
+                gap: 10px;
+            }
+
+            .knob {
+                width: 25px;
+                height: 25px;
+            }
+
+            .tv-old-leg {
+                width: 50px;
+                height: 35px;
+            }
+
+            .tv-box {
+                width: 260px;
+                height: 210px;
+            }
+
+            .tv-box-body {
+                padding: 15px;
+            }
+
+            .box-button {
+                width: 35px;
+                height: 12px;
+            }
+
+            .tv-flat {
+                width: 300px;
+                height: 190px;
+            }
+
+            .tv-flat-frame {
+                padding: 12px;
+            }
+
+            .tv-flat-stand {
+                width: 100px;
+                height: 18px;
+            }
+
+            .tv-smart {
+                width: 340px;
+                height: 210px;
+            }
+
+            .tv-smart-frame {
+                padding: 6px;
+            }
+
+            .tv-smart-stand {
+                width: 80px;
+                height: 12px;
+            }
+
+            .frame-info {
+                font-size: 1.1em;
+                padding: 0 10px;
+            }
+
+            .controls {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .control-btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+
+            .play-pause {
+                font-size: 1.3em;
+                padding: 12px 25px;
+                order: -1;
+                width: 100%;
+            }
+
+            .content-section {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            p {
+                font-size: 1em;
+                text-align: left;
+            }
+
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                padding: 20px;
+            }
+
+            footer {
+                padding: 25px 15px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            header {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 15px;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .stop-motion-container {
+                padding: 20px 10px;
+            }
+
+            .stop-motion-title {
+                font-size: 1.3em;
+                margin-bottom: 15px;
+            }
+
+            .animation-stage {
+                height: 280px;
+                padding: 10px;
+            }
+
+            .tv-old {
+                width: 180px;
+                height: 160px;
+            }
+
+            .tv-old-body {
+                padding: 15px;
+                border-radius: 25px 25px 8px 8px;
+            }
+
+            .tv-old-screen {
+                border: 6px solid #333;
+            }
+
+            .tv-old-knobs {
+                right: 10px;
+                gap: 8px;
+            }
+
+            .knob {
+                width: 20px;
+                height: 20px;
+                border: 2px solid #222;
+            }
+
+            .tv-old-leg {
+                width: 40px;
+                height: 30px;
+            }
+
+            .tv-box {
+                width: 220px;
+                height: 180px;
+            }
+
+            .tv-box-body {
+                padding: 12px;
+                border-radius: 12px;
+            }
+
+            .tv-box-screen {
+                border: 4px solid #111;
+            }
+
+            .tv-box-buttons {
+                gap: 6px;
+                margin-top: 10px;
+            }
+
+            .box-button {
+                width: 30px;
+                height: 10px;
+            }
+
+            .tv-flat {
+                width: 260px;
+                height: 170px;
+            }
+
+            .tv-flat-frame {
+                padding: 10px;
+            }
+
+            .tv-flat-stand {
+                width: 80px;
+                height: 15px;
+                margin-top: 8px;
+            }
+
+            .tv-smart {
+                width: 280px;
+                height: 180px;
+            }
+
+            .tv-smart-frame {
+                padding: 5px;
+            }
+
+            .tv-smart-stand {
+                width: 60px;
+                height: 10px;
+                margin-top: 6px;
+            }
+
+            .frame-info {
+                font-size: 0.95em;
+                padding: 0 5px;
+                line-height: 1.4;
+            }
+
+            .controls {
+                gap: 8px;
+            }
+
+            .control-btn {
+                padding: 8px 16px;
+                font-size: 0.9em;
+                border-radius: 8px;
+            }
+
+            .play-pause {
+                font-size: 1.2em;
+                padding: 10px 20px;
+            }
+
+            .content-section {
+                padding: 25px 15px;
+                border-radius: 15px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+                margin-bottom: 15px;
+            }
+
+            p {
+                font-size: 0.95em;
+                line-height: 1.6;
+                margin-bottom: 12px;
+            }
+
+            .timeline-item {
+                padding: 18px;
+                border-left: 4px solid #ffd700;
+            }
+
+            .year {
+                font-size: 1.3em;
+                margin-bottom: 8px;
+            }
+
+            footer {
+                padding: 20px 10px;
+                font-size: 0.95em;
+            }
+        }
+
+        @media screen and (max-width: 360px) {
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .stop-motion-title {
+                font-size: 1.1em;
+            }
+
+            .animation-stage {
+                height: 260px;
+            }
+
+            .tv-old {
+                width: 160px;
+                height: 140px;
+            }
+
+            .tv-box {
+                width: 200px;
+                height: 160px;
+            }
+
+            .tv-flat {
+                width: 240px;
+                height: 150px;
+            }
+
+            .tv-smart {
+                width: 260px;
+                height: 160px;
+            }
+
+            .frame-info {
+                font-size: 0.85em;
+            }
+
+            .control-btn {
+                padding: 7px 12px;
+                font-size: 0.85em;
+            }
+
+            .play-pause {
+                font-size: 1.1em;
+                padding: 9px 18px;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📺 EL TELEVISOR</h1>
+            <p class="subtitle">Un Viaje por la Historia de la Tecnología</p>
+        </header>
+
+        <div class="stop-motion-container">
+            <h2 class="stop-motion-title">🎬 Stop Motion: Evolución del Televisor</h2>
+            
+            <div class="animation-stage" id="stage">
+                <!-- Frame 1: TV Antiguo 1950s -->
+                <div class="tv-evolution tv-old" id="frame1" style="display: none;">
+                    <div class="tv-old-body">
+                        <div class="tv-old-screen"></div>
+                        <div class="tv-old-knobs">
+                            <div class="knob"></div>
+                            <div class="knob"></div>
+                        </div>
+                    </div>
+                    <div class="tv-old-legs">
+                        <div class="tv-old-leg"></div>
+                        <div class="tv-old-leg"></div>
+                    </div>
+                </div>
+
+                <!-- Frame 2: TV Box 1980s-90s -->
+                <div class="tv-evolution tv-box" id="frame2" style="display: none;">
+                    <div class="tv-box-body">
+                        <div class="tv-box-screen"></div>
+                        <div class="tv-box-buttons">
+                            <div class="box-button"></div>
+                            <div class="box-button"></div>
+                            <div class="box-button"></div>
+                            <div class="box-button"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frame 3: TV Plano 2000s -->
+                <div class="tv-evolution tv-flat" id="frame3" style="display: none;">
+                    <div class="tv-flat-frame">
+                        <div class="tv-flat-screen"></div>
+                    </div>
+                    <div class="tv-flat-stand"></div>
+                </div>
+
+                <!-- Frame 4: Smart TV Actual -->
+                <div class="tv-evolution tv-smart" id="frame4" style="display: none;">
+                    <div class="tv-smart-frame">
+                        <div class="tv-smart-screen">
+                            <div class="smart-glow"></div>
+                        </div>
+                    </div>
+                    <div class="tv-smart-stand"></div>
+                </div>
+            </div>
+
+            <div class="frame-info" id="frameInfo">Presiona Play para comenzar</div>
+
+            <div class="controls">
+                <button class="control-btn" id="prevBtn">⏮️ Anterior</button>
+                <button class="control-btn play-pause" id="playBtn">▶️ Play</button>
+                <button class="control-btn" id="nextBtn">Siguiente ⏭️</button>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>¿Qué es el Televisor?</h2>
+            <p>
+                El televisor es uno de los objetos tecnológicos más revolucionarios del siglo XX. Este dispositivo 
+                electrónico permite recibir y reproducir señales de audio y video, transmitiendo imágenes en movimiento 
+                y sonido de forma sincronizada. Desde su invención, ha transformado completamente la manera en que 
+                consumimos información y entretenimiento.
+            </p>
+            <p>
+                El televisor funciona mediante la conversión de señales electromagnéticas en imágenes y sonidos que 
+                pueden ser percibidos por los usuarios. A lo largo de su evolución, ha pasado por múltiples transformaciones 
+                tecnológicas, desde los tubos de rayos catódicos hasta las modernas pantallas OLED y QLED.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>Evolución Histórica</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="year">1927</div>
+                    <p>Primera demostración pública de televisión electrónica por Philo Farnsworth</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">1950s</div>
+                    <p>Expansión masiva de televisores en blanco y negro en los hogares</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">1960s</div>
+                    <p>Introducción de la televisión a color</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">1990s</div>
+                    <p>Llegada de las pantallas planas LCD y plasma</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2000s</div>
+                    <p>Era de alta definición (HD) y pantallas LED</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2010s-Hoy</div>
+                    <p>Televisores inteligentes 4K/8K con internet y streaming</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Impacto Social y Cultural</h2>
+            <p>
+                El televisor ha sido un agente de cambio social sin precedentes. Ha unido a las familias alrededor 
+                de programas favoritos, ha informado sobre eventos mundiales en tiempo real, y ha moldeado la cultura 
+                popular de generaciones enteras. Desde los primeros noticieros hasta las series de streaming actuales, 
+                la televisión ha sido una ventana al mundo.
+            </p>
+            <p>
+                En la actualidad, los televisores inteligentes han evolucionado para convertirse en centros de 
+                entretenimiento multimedia, integrando servicios de streaming, navegación web, videojuegos y 
+                conectividad con otros dispositivos inteligentes del hogar.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>Tecnología Moderna</h2>
+            <p>
+                Los televisores actuales incorporan tecnologías avanzadas como:
+            </p>
+            <p>
+                <strong>• Resolución 4K y 8K:</strong> Ofrecen imágenes con una claridad excepcional, con millones 
+                de píxeles que crean experiencias visuales inmersivas.
+            </p>
+            <p>
+                <strong>• HDR (High Dynamic Range):</strong> Mejora el contraste y el rango de colores para imágenes 
+                más realistas y vibrantes.
+            </p>
+            <p>
+                <strong>• Smart TV:</strong> Conectividad a internet que permite acceder a plataformas de streaming, 
+                aplicaciones y contenido en línea directamente desde el televisor.
+            </p>
+            <p>
+                <strong>• Pantallas OLED y QLED:</strong> Tecnologías de pantalla que ofrecen negros más profundos, 
+                colores más precisos y tiempos de respuesta más rápidos.
+            </p>
+        </div>
+
+        <footer>
+            <p>El televisor: conectando al mundo, un píxel a la vez 🌍📺</p>
+        </footer>
+    </div>
+
+    <script>
+        const frames = [
+            { id: 'frame1', info: '📺 Años 1950s - Televisor de Tubo con Mueble de Madera' },
+            { id: 'frame2', info: '📺 Años 1980s-90s - Televisor de Caja con Control Remoto' },
+            { id: 'frame3', info: '📺 Años 2000s - Televisor de Pantalla Plana LCD/Plasma' },
+            { id: 'frame4', info: '📺 Años 2010s-Actualidad - Smart TV Ultra Delgado' }
+        ];
+
+        let currentFrame = 0;
+        let isPlaying = false;
+        let playInterval;
+
+        const frameInfo = document.getElementById('frameInfo');
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function showFrame(index) {
+            frames.forEach((frame, i) => {
+                const element = document.getElementById(frame.id);
+                element.style.display = i === index ? 'block' : 'none';
+            });
+            frameInfo.textContent = frames[index].info;
+            currentFrame = index;
+        }
+
+        function nextFrame() {
+            currentFrame = (currentFrame + 1) % frames.length;
+            showFrame(currentFrame);
+        }
+
+        function prevFrame() {
+            currentFrame = (currentFrame - 1 + frames.length) % frames.length;
+            showFrame(currentFrame);
+        }
+
+        function togglePlay() {
+            isPlaying = !isPlaying;
+            
+            if (isPlaying) {
+                playBtn.textContent = '⏸️ Pausa';
+                playInterval = setInterval(nextFrame, 1500);
+            } else {
+                playBtn.textContent = '▶️ Play';
+                clearInterval(playInterval);
+            }
+        }
+
+        playBtn.addEventListener('click', togglePlay);
+        nextBtn.addEventListener('click', () => {
+            if (isPlaying) togglePlay();
+            nextFrame();
+        });
+        prevBtn.addEventListener('click', () => {
+            if (isPlaying) togglePlay();
+            prevFrame();
+        });
+
+        showFrame(0);
+    </script>
+</body>
+</html>
